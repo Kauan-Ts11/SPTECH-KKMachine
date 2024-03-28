@@ -21,7 +21,7 @@
 ### TELAS
 
 <p align="center">
-  <img src="kk-machine/images/kk-machine.png" width="600">
+  <img src="kk-machine/images/image.png" width="800">
 </p>
 
 #
