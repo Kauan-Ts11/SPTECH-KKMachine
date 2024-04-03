@@ -26,23 +26,29 @@
             <p>Insira um valor e sua Base</p>
 
             <div class="input-select">
-                <input type="number" placeholder="Ex.: 10 (Decimal)" id="valor">
-                <select id="base">
-                    <option value="10" selected>10</option>
+
+                <input type="text" placeholder="Ex.: 10" id="inp_numero">
+                <select id="s_base">
                     <option value="2">2</option>
                     <option value="8">8</option>
+                    <option value="10" selected>10</option>
                     <option value="16">16</option>
                 </select>
+
             </div>
 
-            <p>O seu número na base binária é </p>
-            <input type="text" placeholder="resultado em tempo real..." id="n1" readonly>
+        </div>
 
-            <p>O seu número na base octal é </p>
-            <input type="text" placeholder="resultado em tempo real..." id="n2" readonly>
+        <div id="resultado">
 
-            <p>O seu número na base hexadecimal é </p>
-            <input type="text" placeholder="resultado em tempo real..." id="n3" readonly>
+            <p id="p1">O seu número na base Binario é </p>
+            <input type="text" placeholder="resultado em tempo real..." id="r1" readonly>
+
+            <p id="p2">O seu número na base Octal é </p>
+            <input type="text" placeholder="resultado em tempo real..." id="r2" readonly>
+
+            <p id="p3">O seu número na base Hexadecimal é </p>
+            <input type="text" placeholder="resultado em tempo real..." id="r3" readonly>
 
         </div>
 

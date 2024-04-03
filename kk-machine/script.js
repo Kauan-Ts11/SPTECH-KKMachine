@@ -1,46 +1,133 @@
-// function converter () {
-
-//     // INPUTS
-
-//     // var decimal = Number(document.getElementById('valor').value);
-
-    
-//     // // DECLARANDO VARIAVEIS
-
-//     // let octal = decimal.toString(8);
-//     // let hexa = decimal.toString(16).toUpperCase();
-//     // let binario = decimal.toString(2);
- 
-
-//     // // MOSTRANDO RESULTADOS
-
-//     // document.getElementById('resultado1').innerHTML = `<p>O seu número na base binária é </p><input  value= ${binario} readonly>`;
-//     // document.getElementById('resultado2').innerHTML = `<p>O seu número na base octal é </p><input  value= ${octal} readonly>`;
-//     // document.getElementById('resultado3').innerHTML = `<p>O seu número na base hexadecimal é </p> <input  value=${hexa} readonly>`;
-
-// }
-
 document.addEventListener('DOMContentLoaded', function () {
 
     function realTime() {
 
         // INPUTS
-        
-        var value = Number(document.getElementById('valor').value);
-    
-    
-        // DECLARANDO VARIAVEIS
-    
-        var binario = value.toString(2);
-        var octal = value.toString(8);
-        var hexa = value.toString(16).toUpperCase();
-    
-        document.getElementById('n1').value = binario;
-        document.getElementById('n2').value = octal;
-        document.getElementById('n3').value = hexa;
+
+        var numero = document.getElementById('inp_numero').value;
+        var base = Number(document.getElementById('s_base').value);
+
+
+        // VARIAVEL DOS CARACTERES PERMITIDOS
+
+        var caracteresPermitidos = '';
+
+
+        // VERIFICA QUAL É A BASE E DETERMINA OS CARACTERES PERMITIDOS
+
+        if (base == '2') {
+            caracteresPermitidos = '01';
+        }
+
+        else if (base == '8') {
+            caracteresPermitidos = '01234567';
+        }
+
+        else if (base == '10') {
+            caracteresPermitidos = '0123456789';
+        }
+
+        else {
+            caracteresPermitidos = '0123456789ABCDEFabcdef';
+        }
+
+
+        // PERCORRE O INPUT DO USUÁRIO E VERIFICA SE OS CARACTERES SÃO VÁLIDOS
+
+        for (var i = 0; i < numero.length; i++) {
+            if (caracteresPermitidos.indexOf(numero[i]) === -1) {
+
+                alert("Caractere Inválido!")
+
+                // LIMPA AS INPUTS
+
+                document.getElementById('inp_numero').value = "";
+                document.getElementById('r1').value = "";
+                document.getElementById('r2').value = "";
+                document.getElementById('r3').value = "";
+
+                return;
+            }
+        }
+
+
+        // CONVERTENDO OS VALORES
+
+        var global = parseInt(numero, base)
+
+        var d = global.toString(10);
+        var b = global.toString(2);
+        var o = global.toString(8);
+        var h = global.toString(16).toUpperCase();
+
+
+        // VERIFICA SE O VALOR DA VARIAVEL CORRESPONDE A SUA BASE OU NÃO É (isNaN - undefined), CASO CONTRÁRIO, RECEBE UMA STRING VAZIA
+
+        var decimal = !isNaN(d) ? d : '';
+        var binario = !isNaN(b) ? b : '';
+        var octal = !isNaN(o) ? o : '';
+        var hexa = (h !== undefined && /^[0-9A-Fa-f]+$/.test(h)) ? h : '';
+
+
+        // VERIFICA A BASE PARA MOSTRAR O RESULTADO AO USUÁRIO
+
+        if (base == 2) {
+
+            p1.innerText = "O seu número na base Octal é "
+            p2.innerText = "O seu número na base Decimal é "
+            p3.innerText = "O seu número na base Hexadecimal é "
+
+            atualizarCampos(octal, decimal, hexa)
+
+        }
+
+        else if (base == 8) {
+
+            p1.innerText = "O seu número na base Binaria é "
+            p2.innerText = "O seu número na base Decimal é "
+            p3.innerText = "O seu número na base Hexadecimal é "
+
+            atualizarCampos(binario, decimal, hexa)
+
+        }
+
+        else if (base == 10) {
+
+            p1.innerText = "O seu número na base Binaria é "
+            p2.innerText = "O seu número na base Octal é "
+            p3.innerText = "O seu número na base Hexadecimal é "
+
+            atualizarCampos(binario, octal, hexa)
+
+        }
+
+        else if (base == 16) {
+
+            p1.innerText = "O seu número na base Binaria é "
+            p2.innerText = "O seu número na base Octal é "
+            p3.innerText = "O seu número na base Decimal é "
+
+            atualizarCampos(binario, octal, decimal)
+
+        }
+
     }
-    
-    document.getElementById('valor').addEventListener('input', realTime)
-    
+
+
+    // CHAMA A FUNCTION realTime SEMPRE QUE OCORRE UMA INTERAÇÃO COM O INPUT OU SELECT
+
+    document.getElementById('inp_numero').addEventListener('input', realTime);
+    document.getElementById('s_base').addEventListener('change', realTime);
+
 });
 
+
+// FUNÇÃO QUE ATUALIZA OS CAMPOS
+
+function atualizarCampos(b1, b2, b3) {
+
+    document.getElementById('r1').value = b1
+    document.getElementById('r2').value = b2
+    document.getElementById('r3').value = b3;
+
+}
